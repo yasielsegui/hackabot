@@ -1,32 +1,27 @@
-var restify = require('restify');
-var builder = require('botbuilder');
+const restify = require('restify');
+const skype = require('skype-sdk');
+const builder = require('botbuilder');
 
-// Get secrets from server environment
-var botConnectorOptions = { 
-    appId: process.env.BOTFRAMEWORK_APPID, 
-    appSecret: process.env.BOTFRAMEWORK_APPSECRET 
-};
+// Initialize the BotService
+const botService = new skype.BotService({
+    messaging: {
+        botId: "28:<bot’s id>",
+        serverUrl : "https://apis.skype.com",
+        requestTimeout : 15000,
+        appId: process.env.APP_ID,
+        appSecret: process.env.APP_SECRET
+    }
+});
 
-// Create bot
-var bot = new builder.BotConnectorBot(botConnectorOptions);
+// Create bot and add dialogs
+var bot = new builder.SkypeBot(botService);
 bot.add('/', function (session) {
-    
-    //respond with user's message
-    session.send("You said " + session.message.text);
+   session.send('Hello World'); 
 });
 
 // Setup Restify Server
-var server = restify.createServer();
-
-// Handle Bot Framework messages
-server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
-
-// Serve a static web page
-server.get(/.*/, restify.serveStatic({
-	'directory': '.',
-	'default': 'index.html'
-}));
-
-server.listen(process.env.port || 3978, function () {
-    console.log('%s listening to %s', server.name, server.url); 
+const server = restify.createServer();
+server.post('/v1/chat', skype.messagingHandler(botService));
+server.listen(process.env.PORT || 8080, function () {
+   console.log('%s listening to %s', server.name, server.url); 
 });
