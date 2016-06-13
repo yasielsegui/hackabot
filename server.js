@@ -14,19 +14,22 @@ const botService = new skype.BotService({
 });
 
 // Create bot and add dialogs
+console.log("Creating SkypeBot ...");
 var bot = new builder.SkypeBot(botService);
 bot.add('/', function (session) {
    //respond with user message
     //session.send("You said " + session.message.text);
+    console.log("Helloooooo");
     session.send("HELLOoooooooooooooo");
 });
 
 // Setup Restify Server
+console.log("Creating restify server ...");
 const server = restify.createServer();
 server.post('/api/messages', skype.messagingHandler(botService));
 
 // Serve a static web page
-
+console.log("Configuring the restify server to serve the bot home page ...");
 server.get(/.*/, restify.serveStatic({
 	'directory': '.',
 	'default': 'index.html'
