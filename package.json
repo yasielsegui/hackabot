@@ -21,10 +21,10 @@
   "homepage": "https://github.com/fuselabs/echobot#readme",
   "dependencies": {
     "botbuilder": "^0.6.5",
-    "restify": "^4.0.4"
+    "restify": "^4.1.0",
+    "skype-sdk": "file:skype-sdk.tar.gz"
   },
   "engines": {
-      "node": ">=5.6.0"
+    "node": ">=5.6.0"
   }
-
 }
