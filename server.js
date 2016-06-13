@@ -17,7 +17,8 @@ const botService = new skype.BotService({
 var bot = new builder.SkypeBot(botService);
 bot.add('/', function (session) {
    //respond with user message
-    session.send("You said " + session.message.text);
+    //session.send("You said " + session.message.text);
+    session.send("HELLOoooooooooooooo");
 });
 
 // Setup Restify Server
