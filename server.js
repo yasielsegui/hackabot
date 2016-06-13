@@ -16,7 +16,7 @@ const botService = new skype.BotService({
 // Create bot and add dialogs
 var bot = new builder.SkypeBot(botService);
 bot.add('/', function (session) {
-   //respond with user's message
+   //respond with user message
     session.send("You said " + session.message.text);
 });
 
