@@ -13,8 +13,22 @@ const botService = new skype.BotService({
     }
 });
 
+
+
+
+
 // Create bot and add dialogs
 console.log("Creating SkypeBot ...");
+
+botService.on('contactAdded', (bot, data) => {
+    bot.reply(`Hello ${data.fromDisplayName}!`, true);
+});
+
+botService.on('personalMessage', (bot, data) => {
+    bot.reply(`Hey ${data.from}. Thank you for your message: "${data.content}".`, true);
+});
+
+/*
 var bot = new builder.SkypeBot(botService);
 bot.add('/', function (session) {
    //respond with user message
@@ -22,6 +36,7 @@ bot.add('/', function (session) {
     console.log("Helloooooo");
     session.send("HELLOoooooooooooooo");
 });
+*/
 
 // Setup Restify Server
 console.log("Creating restify server ...");
