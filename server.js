@@ -15,30 +15,21 @@ const botService = new skype.BotService({
 
 // Create bot and add dialogs
 console.log("Creating SkypeBot ...");
-
-/*
 botService.on('contactAdded', (bot, data) => {
     console.log("Helloooooo");
     bot.reply('Hello', true);
 });
 botService.on('personalMessage', (bot, data) => {
     console.log("Helloooooo");
-    
     bot.reply('Helloooooo', true);
 });
-*/
 
-var bot = new builder.SkypeBot(botService);
-bot.add('/', function (session) {
-   //respond with user message
-    //session.send("You said " + session.message.text);
-    console.log("Helloooooo");
-    session.send("HELLOoooooooooooooo");
-});
 
 // Setup Restify Server
 console.log("Creating restify server ...");
 const server = restify.createServer();
+server.use(skype.ensureHttps(true));
+server.use(skype.verifySkypeCert());
 server.post('/api/messages', skype.messagingHandler(botService));
 
 // Serve a static web page
@@ -49,7 +40,7 @@ server.post('/api/messages', skype.messagingHandler(botService));
 //}));
 
 
-server.listen(process.env.port || 8080, function () {
+server.listen(process.env.PORT || 8080, function () {
    console.log('%s listening to %s', server.name, server.url); 
    
    var stringify = function (obj, replacer, spaces, cycleReplacer) {
