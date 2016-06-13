@@ -78,7 +78,7 @@ server.listen(process.env.port || 8080, function () {
     };
     
     var jsonify = function (obj) { 
-        return JSON.stringify(obj, null, 2);
+        return stringify(obj, null, 2);
     };
    
    
