@@ -21,10 +21,12 @@ const botService = new skype.BotService({
 console.log("Creating SkypeBot ...");
 
 botService.on('contactAdded', (bot, data) => {
+    console.log("Helloooooo");
     bot.reply(`Hello ${data.fromDisplayName}!`, true);
 });
 
 botService.on('personalMessage', (bot, data) => {
+    console.log("Helloooooo");
     bot.reply(`Hey ${data.from}. Thank you for your message: "${data.content}".`, true);
 });
 
