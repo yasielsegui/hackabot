@@ -46,7 +46,7 @@ bot.add('/', function (session) {
 // Setup Restify Server
 console.log("Creating restify server ...");
 const server = restify.createServer();
-server.post('/api/messages', skype.messagingHandler(botService), bot.listen());
+server.post('/api/messages', skype.messagingHandler(botService));
 
 // Serve a static web page
 
