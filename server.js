@@ -44,7 +44,7 @@ bot.add('/', function (session) {
 // Setup Restify Server
 console.log("Creating restify server ...");
 const server = restify.createServer();
-server.post('/api/messages', skype.messagingHandler(botService));
+server.post('http://myhackabot.azurewebsites.net/api/messages', skype.messagingHandler(botService));
 
 // Serve a static web page
 
@@ -56,7 +56,7 @@ server.post('/api/messages', skype.messagingHandler(botService));
 
 
 server.listen(process.env.port || 8080, function () {
-   console.log('%s listening to %s', server.name, server.url); 
+   console.log('%s listening to %s', server.name,  "X->" + server.url); 
 });
 
 /*
