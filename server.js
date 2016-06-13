@@ -20,6 +20,7 @@ const botService = new skype.BotService({
 // Create bot and add dialogs
 console.log("Creating SkypeBot ...");
 
+/*
 botService.on('contactAdded', (bot, data) => {
     console.log("Helloooooo");
     bot.reply('Hello', true);
@@ -30,8 +31,9 @@ botService.on('personalMessage', (bot, data) => {
     
     bot.reply('Helloooooo', true);
 });
+*/
 
-/*
+
 var bot = new builder.SkypeBot(botService);
 bot.add('/', function (session) {
    //respond with user message
@@ -39,12 +41,12 @@ bot.add('/', function (session) {
     console.log("Helloooooo");
     session.send("HELLOoooooooooooooo");
 });
-*/
+
 
 // Setup Restify Server
 console.log("Creating restify server ...");
 const server = restify.createServer();
-server.post('http://myhackabot.azurewebsites.net/api/messages', skype.messagingHandler(botService));
+server.post('/api/messages', skype.messagingHandler(botService), bot.listen());
 
 // Serve a static web page
 
