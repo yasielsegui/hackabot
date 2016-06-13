@@ -27,6 +27,7 @@ botService.on('contactAdded', (bot, data) => {
 
 botService.on('personalMessage', (bot, data) => {
     console.log("Helloooooo");
+    
     bot.reply('Helloooooo', true);
 });
 
@@ -46,11 +47,13 @@ const server = restify.createServer();
 server.post('/api/messages', skype.messagingHandler(botService));
 
 // Serve a static web page
-console.log("Configuring the restify server to serve the bot home page ...");
-server.get(/.*/, restify.serveStatic({
-	'directory': '.',
-	'default': 'index.html'
-}));
+
+//console.log("Configuring the restify server to serve the bot home page ...");
+//server.get(/.*/, restify.serveStatic({
+//	'directory': '.',
+//	'default': 'index.html'
+//}));
+
 
 server.listen(process.env.port || 8080, function () {
    console.log('%s listening to %s', server.name, server.url); 
