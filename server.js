@@ -1,48 +1,3 @@
-const restify = require('restify');
-const skype = require('skype-sdk');
-const builder = require('botbuilder');
-
-// Initialize the BotService
-const botService = new skype.BotService({
-    messaging: {
-        botId: "28:d35570cc-7cc3-4fe3-9cb9-9db7a42eb17e",
-        serverUrl : "https://apis.skype.com",
-        requestTimeout : 15000,
-        appId: process.env.APP_ID,
-        appSecret: process.env.APP_SECRET
-    }
-});
-
-// Create bot and add dialogs
-console.log("Creating SkypeBot ...");
-botService.on('contactAdded', (bot, data) => {
-    console.log("Helloooooo");
-    bot.reply('Hello', true);
-});
-botService.on('personalMessage', (bot, data) => {
-    console.log("Helloooooo");
-    bot.reply('Helloooooo', true);
-});
-
-
-// Setup Restify Server
-console.log("Creating restify server ...");
-const server = restify.createServer();
-//server.use(skype.ensureHttps(true));
-server.use(skype.verifySkypeCert());
-server.post('/api/messages', skype.messagingHandler(botService));
-
-// Serve a static web page
-//console.log("Configuring the restify server to serve the bot home page ...");
-//server.get(/.*/, restify.serveStatic({
-//	'directory': '.',
-//	'default': 'index.html'
-//}));
-
-
-server.listen(process.env.PORT || 8080, function () {
-   console.log('%s listening to %s', server.name, server.url); 
-   
    var stringify = function (obj, replacer, spaces, cycleReplacer) {
       return JSON.stringify(obj, serializer(replacer, cycleReplacer), spaces);
    };
@@ -71,7 +26,57 @@ server.listen(process.env.PORT || 8080, function () {
     var jsonify = function (obj) { 
         return stringify(obj, null, 2);
     };
-   
+
+const restify = require('restify');
+const skype = require('skype-sdk');
+const builder = require('botbuilder');
+
+
+
+
+// Initialize the BotService
+const botService = new skype.BotService({
+    messaging: {
+        botId: "28:d35570cc-7cc3-4fe3-9cb9-9db7a42eb17e",
+        serverUrl : "https://apis.skype.com",
+        requestTimeout : 15000,
+        appId: process.env.APP_ID,
+        appSecret: process.env.APP_SECRET
+    }
+});
+
+// Create bot and add dialogs
+console.log("Creating SkypeBot ...");
+botService.on('contactAdded', (bot, data) => {
+    console.log("Helloooooo");
+    bot.reply('Hello', true);
+});
+botService.on('personalMessage', (bot, data) => {
+    console.log("Helloooooo");
+    bot.reply('Helloooooo', true);
+});
+
+
+// Setup Restify Server
+console.log("Creating restify server ...");
+const server = restify.createServer();
+//server.use(skype.ensureHttps(true));
+server.use(skype.verifySkypeCert(req, resp, function(){
+    console.log(jsonify(req));
+    console.log(jsonify(resp));
+}));
+server.post('/api/messages', skype.messagingHandler(botService));
+
+// Serve a static web page
+//console.log("Configuring the restify server to serve the bot home page ...");
+//server.get(/.*/, restify.serveStatic({
+//	'directory': '.',
+//	'default': 'index.html'
+//}));
+
+
+server.listen(process.env.PORT || 8080, function () {
+   console.log('%s listening to %s', server.name, server.url); 
    
    console.log(jsonify(server));
 });
