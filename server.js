@@ -61,13 +61,7 @@ botService.on('personalMessage', (bot, data) => {
 console.log("Creating restify server ...");
 const server = restify.createServer();
 //server.use(skype.ensureHttps(true));
-/*
-server.use(function(req, resp, next){
-    console.log(jsonify(req));
-    console.log(jsonify(resp));
-    next();
-});
-*/
+server.use(skype.verifySkypeCert());
 server.post('/api/messages', skype.messagingHandler(botService));
 
 // Serve a static web page
