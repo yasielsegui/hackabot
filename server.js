@@ -5,7 +5,7 @@ const builder = require('botbuilder');
 // Initialize the BotService
 const botService = new skype.BotService({
     messaging: {
-        botId: process.env.APP_ID,
+        botId: "28:d35570cc-7cc3-4fe3-9cb9-9db7a42eb17e",
         serverUrl : "https://apis.skype.com",
         requestTimeout : 15000,
         appId: process.env.APP_ID,
