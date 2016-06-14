@@ -30,7 +30,7 @@ console.log("Creating restify server ...");
 const server = restify.createServer();
 //server.use(skype.ensureHttps(true));
 server.use(skype.verifySkypeCert());
-server.post('https://myhackabot.azurewebsites.net/api/messages', skype.messagingHandler(botService));
+server.post('/api/messages', skype.messagingHandler(botService));
 
 // Serve a static web page
 //console.log("Configuring the restify server to serve the bot home page ...");
