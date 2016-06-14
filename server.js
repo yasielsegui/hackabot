@@ -29,7 +29,7 @@ botService.on('personalMessage', (bot, data) => {
 console.log("Creating restify server ...");
 const server = restify.createServer();
 server.use(skype.ensureHttps(true));
-server.use(skype.verifySkypeCert());
+//server.use(skype.verifySkypeCert());
 server.post('https://myhackabot.azurewebsites.net/api/messages', skype.messagingHandler(botService));
 
 // Serve a static web page
