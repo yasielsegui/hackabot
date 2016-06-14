@@ -75,6 +75,6 @@ server.post('/api/messages', skype.messagingHandler(botService));
 server.listen(process.env.PORT || 8080, function () {
    console.log('%s listening to %s', server.name, server.url); 
    
-   console.log(jsonify(server));
+   //console.log(jsonify(server));
 });
 
