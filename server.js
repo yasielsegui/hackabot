@@ -40,8 +40,8 @@ const botService = new skype.BotService({
         botId: "28:d35570cc-7cc3-4fe3-9cb9-9db7a42eb17e",
         serverUrl : "https://apis.skype.com",
         requestTimeout : 15000,
-        appId: process.env.APP_ID,
-        appSecret: process.env.APP_SECRET
+        appId: process.env.APP_ID || 'hackabot',
+        appSecret: process.env.APP_SECRET || '3bb9e620eed743a6a4b82593382b8144'
     }
 });
 
